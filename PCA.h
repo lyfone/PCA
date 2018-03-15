@@ -44,6 +44,8 @@ public:
     std::vector<float> get_points();
     //读取和
     double get_sum();
+    //开始
+    void start(float f);
     //重置
     void reset();
 };
@@ -83,12 +85,12 @@ int PCA::get_width() {
 bool PCA::push(float f) {
     points.push_back(f);
     sum += f;
-    counter++;
+    counter += 1;
     if(counter == pca_data.width){
         pca_data.avg = sum / counter;
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }
 
 /**
@@ -105,6 +107,16 @@ std::vector<float> PCA::get_points() {
  */
 double PCA::get_sum() {
     return sum;
+}
+/**
+ * 开始编码
+ * @param f
+ */
+void PCA::start(float f) {
+    reset();
+    points.push_back(f);
+    sum += f;
+    counter +=1;
 }
 
 /**
